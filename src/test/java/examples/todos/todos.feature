@@ -12,7 +12,6 @@ Feature: Karate Basic Todos
     # Check all response objects
     And match each response contains {complete: '#boolean'}
 
-    @ignore
   Scenario: Get todo flow
     * def taskName = 'First task'
 
@@ -53,8 +52,4 @@ Feature: Karate Basic Todos
     * match firstTask.title == taskName
     * match firstTask.complete == false
 
-    #Clear all todo
-    Given url 'http://localhost:8080/api/reset'
-    When method Post
-    Then status 200
-    And match response == {deleted: '#number'}
+    * call read('classpath:helpers/resetTodos.feature')
